@@ -1,5 +1,5 @@
 import UserProfile from './components/UserProfile';
-
+import Counter from './components/Counter';
 
 function App() {
   return (
@@ -15,6 +15,8 @@ function App() {
         age="26" 
         bio="Aspiring data scientist & software developer passionate about AI and digital transformation" 
       />
+
+      <Counter />
     </div>
   );
 }
