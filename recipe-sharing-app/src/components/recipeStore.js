@@ -1,34 +1,32 @@
 import { create } from 'zustand';
 
-export const useRecipeStore = create((set) => ({
+export const useRecipeStore = create((set, get) => ({
   recipes: [],
-  searchTerm: '',
-  filteredRecipes: [],
+  favorites: [],
+  recommendations: [],
 
-  addRecipe: (newRecipe) =>
-    set((state) => {
-      const updatedRecipes = [...state.recipes, newRecipe];
-      return {
-        recipes: updatedRecipes,
-        filteredRecipes: updatedRecipes.filter((recipe) =>
-          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-        ),
-      };
-    }),
-
-  setRecipes: (recipes) =>
+  // Favorites actions
+  addFavorite: (recipeId) =>
     set((state) => ({
-      recipes,
-      filteredRecipes: recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      ),
+      favorites: state.favorites.includes(recipeId)
+        ? state.favorites // avoid duplicates
+        : [...state.favorites, recipeId],
     })),
 
-  setSearchTerm: (term) =>
+  removeFavorite: (recipeId) =>
     set((state) => ({
-      searchTerm: term,
-      filteredRecipes: state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(term.toLowerCase())
-      ),
+      favorites: state.favorites.filter((id) => id !== recipeId),
     })),
+
+  // Recommendation mock generator
+  generateRecommendations: () => {
+    const { recipes, favorites } = get();
+
+    // Simple mock: recommend recipes NOT in favorites
+    const recommended = recipes.filter(
+      (recipe) => !favorites.includes(recipe.id) && Math.random() > 0.5
+    );
+
+    set({ recommendations: recommended });
+  },
 }));

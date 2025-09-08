@@ -1,6 +1,8 @@
-import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
 import SearchBar from './components/SearchBar';
+import AddRecipeForm from './components/AddRecipeForm';
+import RecipeList from './components/RecipeList';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
       <SearchBar />
       <AddRecipeForm />
       <RecipeList />
+      <FavoritesList />
+      <RecommendationsList />
     </div>
   );
 }
