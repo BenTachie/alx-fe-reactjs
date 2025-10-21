@@ -22,3 +22,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+//ProfileDetails, ProfileSettings
